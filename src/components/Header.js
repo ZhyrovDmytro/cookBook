@@ -26,11 +26,11 @@ class Header extends Component {
         <div>
           {this.props.item.items.map((item) => {
             return (
-              <div key={item.id} id={item.id}>
+              <div key={item._id} id={item._id}>
                 <p>{item.name}</p>
                 <button
                   onClick={() => {
-                    this.onDeleteClick(item.id)
+                    this.onDeleteClick(item._id)
                   }}
                 >
                   delete
