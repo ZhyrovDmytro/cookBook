@@ -1,13 +1,57 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
+import TextField from './common/textFields/TexfField';
+import Button from './common/buttons/Button';
+import { connect } from 'react-redux';
+import { getItems, deleteItem } from '../actions/ItemActions';
 class Header extends Component {
+
+  componentDidMount() {
+    this.props.getItems();
+  }
+
+  onDeleteClick = (id) => {
+    this.props.deleteItem(id);
+  }
+
   render() {
     return (
       <header className="header">
-        <img src={require('../pic/cookbook.jpg')} alt="Cook Book" />
+        <TextField
+          placeholder='find receipe'
+        />
+        <Button
+          content="find"
+        />
+        <div>
+          {this.props.item.items.map((item) => {
+            return (
+              <div key={item.id} id={item.id}>
+                <p>{item.name}</p>
+                <button
+                  onClick={() => {
+                    this.onDeleteClick(item.id)
+                  }}
+                >
+                  delete
+                </button>
+              </div>
+            )
+          })}
+        </div>
+        {/* <img src={require('../pic/cookbook.jpg')} alt="Cook Book" /> */}
       </header>
     );
   }
 }
 
-export default Header;
+Header.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  item: state.item
+})
+
+export default connect(mapStateToProps, { getItems, deleteItem })(Header);
