@@ -20,8 +20,24 @@ router.get('/', (req, res) => {
 // @access Public
 
 router.post('/', (req, res) => {
-   const newItem = new Item({
-       name: req.body.name
+    const {
+        dishName,
+        cookTime,
+        prepareTime,
+        totalTime,
+        ingredient,
+        ingredients,
+        instructions
+    } = req.body;
+
+    const newItem = new Item({
+        dishName,
+        cookTime,
+        prepareTime,
+        totalTime,
+        ingredient,
+        ingredients,
+        instructions
     });
 
     newItem.save()
