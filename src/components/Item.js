@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/ItemActions';
-import uuid from 'uuid';
+import ItemForm from './ItemForm';
 
 class Item extends Component {
     state = {
@@ -15,21 +15,30 @@ class Item extends Component {
         });
     }
 
-    handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    onSubmit = (e) => {
-        e.preventDefault();
+    onSubmit = (val) => {
+        const {
+            dishName,
+            cookTime,
+            ingredient,
+            ingredients,
+            instructions,
+            prepareTime,
+            totalTime
+        } = val;
 
         const newItem = {
-            id: uuid(),
-            name: this.state.name
-        }
+            dishName,
+            cookTime,
+            prepareTime,
+            ingredient,
+            ingredients,
+            instructions,
+            totalTime
+        };
 
         this.props.addItem(newItem);
 
-        this.toggleModal();
+        // this.toggleModal();
     }
 
     render() {
@@ -38,24 +47,17 @@ class Item extends Component {
                 <div
                     className="modal"
                     // isOpen={this.state.isModalOpen}
-                    toggle={this.toggle}
+                    // toggle={this.toggle}
                 >
                     <h1>Add receipe</h1>
-                    <form
+                    <ItemForm
                         onSubmit={this.onSubmit}
+                    />
+                    {/* <button
+                        onClick={this.toggleModal}
                     >
-                        <input
-                            name="name"
-                            onChange={(event) => {
-                                this.handleChange(event)
-                            }}
-                        />
-                        <button
-                            onClick={this.toggleModal}
-                        >
-                            Add item
-                        </button>
-                    </form>
+                        Add item
+                    </button> */}
                 </div>
             </div>
         )

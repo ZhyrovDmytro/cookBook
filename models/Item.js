@@ -1,9 +1,33 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Create Schema
+// Instructions Schema
+const InstructionsSchema = new Schema({ name: [{}] });
+
+// Item Schema
 const ItemSchema = new Schema({
-    name: {
+    dishName: {
+        type: String,
+        required: true
+    },
+    cookTime: {
+        type: String
+    },
+    prepareTime: {
+        type: String
+    },
+    totalTime: {
+        type: String,
+        required: true
+    },
+    ingredient: {
+        type: String,
+        required: true
+    },
+    ingredients: {
+        type: [String],
+    },
+    instructions: {
         type: String,
         required: true
     },
