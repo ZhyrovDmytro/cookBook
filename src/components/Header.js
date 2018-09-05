@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from './common/textFields/TexfField';
 import Button from './common/buttons/Button';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/ItemActions';
@@ -19,7 +18,7 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-        <TextField
+        <input
           placeholder='find receipe'
         />
         <Button
@@ -41,6 +40,8 @@ class Header extends Component {
                   )
                 })}
                 <span><b>Instructions</b></span><p>{item.instructions}</p>
+                {item.img[0] && <img src={item.img[0].preview} />}
+                {item.canvasUrl && <img src={item.canvasUrl} />}
                 <button
                   onClick={() => {
                     this.onDeleteClick(item._id)

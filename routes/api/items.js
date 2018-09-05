@@ -27,7 +27,9 @@ router.post('/', (req, res) => {
         totalTime,
         ingredient,
         ingredients,
-        instructions
+        instructions,
+        img,
+        canvasUrl
     } = req.body;
 
     const newItem = new Item({
@@ -37,7 +39,9 @@ router.post('/', (req, res) => {
         totalTime,
         ingredient,
         ingredients,
-        instructions
+        instructions,
+        img,
+        canvasUrl
     });
 
     newItem.save()

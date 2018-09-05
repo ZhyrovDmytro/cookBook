@@ -5,8 +5,7 @@ import ItemForm from './ItemForm';
 
 class Item extends Component {
     state = {
-        isModalOpen: false,
-        name: ''
+        isModalOpen: false
     }
 
     toggleModal = () => {
@@ -16,6 +15,9 @@ class Item extends Component {
     }
 
     onSubmit = (val) => {
+        const canvas = document.querySelector('.canvas');
+        const canvasUrl = canvas.toDataURL();
+
         const {
             dishName,
             cookTime,
@@ -23,7 +25,8 @@ class Item extends Component {
             ingredients,
             instructions,
             prepareTime,
-            totalTime
+            totalTime,
+            img,
         } = val;
 
         const newItem = {
@@ -33,32 +36,31 @@ class Item extends Component {
             ingredient,
             ingredients,
             instructions,
-            totalTime
+            totalTime,
+            img,
+            canvasUrl
         };
 
         this.props.addItem(newItem);
-
         // this.toggleModal();
     }
 
     render() {
         return (
-            <div>
-                <div
-                    className="modal"
-                    // isOpen={this.state.isModalOpen}
-                    // toggle={this.toggle}
+            <div
+                className="modal"
+                // isOpen={this.state.isModalOpen}
+                // toggle={this.toggle}
+            >
+                <h1>Add receipe</h1>
+                <ItemForm
+                    onSubmit={this.onSubmit}
+                />
+                {/* <button
+                    onClick={this.toggleModal}
                 >
-                    <h1>Add receipe</h1>
-                    <ItemForm
-                        onSubmit={this.onSubmit}
-                    />
-                    {/* <button
-                        onClick={this.toggleModal}
-                    >
-                        Add item
-                    </button> */}
-                </div>
+                    Add item
+                </button> */}
             </div>
         )
     }

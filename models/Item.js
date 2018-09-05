@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const multer = require('multer');
 // Instructions Schema
 const InstructionsSchema = new Schema({ name: [{}] });
 
@@ -30,6 +30,13 @@ const ItemSchema = new Schema({
     instructions: {
         type: String,
         required: true
+    },
+    img: {
+        type: [Schema.Types.Mixed],
+        data: Buffer
+    },
+    canvasUrl: {
+        type: String
     },
     date: {
         type: Date,
