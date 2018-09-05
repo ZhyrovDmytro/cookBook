@@ -3,29 +3,35 @@ import { Field } from 'redux-form';
 import { RenderField } from './RenderField';
 
 export const RenderFieldArray = ({ fields, meta: { error } }) => (
-    <ul>
-      <li>
-        <button type="button" onClick={() => fields.push()}>
-          Add Ingredient
-        </button>
-      </li>
-      {fields.map((ingredients, index) => (
-        <li key={index}>
-          <button
-            type="button"
-            title="Remove Hobby"
-            onClick={() => fields.remove(index)}
-          >
-            Delete ingridient
-          </ button>
-          <Field
-            name={ingredients}
-            type="text"
-            component={RenderField}
-            label={`Ingridient #${index + 2}`}
-          />
-        </li>
-      ))}
-      {error && <li className="error">{error}</li>}
-    </ul>
+    <div className="field-array">
+      <button
+        type="button"
+        onClick={() => fields.push()}
+        className="btn field-array__btn"
+      >
+        Add Ingredient
+      </button>
+      <ul className="list">
+        {fields.map((ingredients, index) => (
+          <li key={index} className="field-array__item">
+            <Field
+              name={ingredients}
+              type="text"
+              component={RenderField}
+              label={`Ingridient #${index + 2}`}
+              className="field-array__input"
+            />
+            <button
+              type="button"
+              className="btn field-array__btn-delete"
+              title="Remove Hobby"
+              onClick={() => fields.remove(index)}
+            >
+              Delete ingridient
+            </ button>
+          </li>
+        ))}
+        {error && <p className="input__error">{error}</p>}
+      </ul>
+    </div>
   )

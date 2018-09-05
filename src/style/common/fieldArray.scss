@@ -1,0 +1,21 @@
+.field-array{
+    &__btn {
+        margin-left: 10px;
+    }
+    
+    &__item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__input {
+        display: inline-block;
+    }
+
+    &__btn-delete {
+        margin-top: 20px;
+        margin-left: 10px;
+        flex-shrink: 0;
+    }
+}

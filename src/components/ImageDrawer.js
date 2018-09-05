@@ -15,10 +15,10 @@ class ImageDrawer extends Component {
     };
 
     componentDidMount() {
-        this.ctx = this.canvas.getContext('2d');
-        this.ctx.lineJoin = 'round';
-        this.ctx.lineCap = 'round';
-        this.ctx.lineWidth = 5;
+        this.canvasContext = this.canvas.getContext('2d');
+        this.canvasContext.lineJoin = 'round';
+        this.canvasContext.lineCap = 'round';
+        this.canvasContext.lineWidth = 5;
     }
 
     onMouseDown = ({ nativeEvent }) => {
@@ -63,22 +63,22 @@ class ImageDrawer extends Component {
         const { offsetX, offsetY } = currPos;
         const { offsetX: x, offsetY: y } = position;
 
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = strokeStyle;
+        this.canvasContext.beginPath();
+        this.canvasContext.strokeStyle = strokeStyle;
         // Move the the prevPosition of the mouse
-        this.ctx.moveTo(x, y);
+        this.canvasContext.moveTo(x, y);
         // Draw a line to the current position of the mouse
-        this.ctx.lineTo(offsetX, offsetY);
+        this.canvasContext.lineTo(offsetX, offsetY);
         // Visualize the line using the strokeStyle
-        this.ctx.stroke();
+        this.canvasContext.stroke();
         this.position = { offsetX, offsetY };
       }
 
     render() {
         return (
-            <div>
+            <div className="image-drawer">
                 <canvas
-                 className="canvas"
+                 className="canvas image-drawer__canvas"
                  width="400"
                  height="400"
                  ref={(ref) => (this.canvas = ref)}
@@ -87,8 +87,9 @@ class ImageDrawer extends Component {
                  onMouseUp={(event) => {this.endPaintEvent(event) }}
                  onMouseMove={(event) => {this.onMouseMove(event) }}
                 />
-                <div>
+                <div className="image-drawer__btns">
                     <button
+                        className="btn btn--black"
                         data-color='BLACK'
                         onClick={(event) => {this.changeColor(event) }}
                     >
@@ -97,6 +98,7 @@ class ImageDrawer extends Component {
                         </span>
                     </button>
                     <button
+                        className="btn btn--red"
                         data-color='RED'
                         onClick={(event) => {this.changeColor(event) }}
                     >
@@ -105,6 +107,7 @@ class ImageDrawer extends Component {
                         </span>
                     </button>
                     <button
+                        className="btn btn--green"
                         data-color='GREEN'
                         onClick={(event) => {this.changeColor(event) }}
                     >
@@ -113,6 +116,7 @@ class ImageDrawer extends Component {
                         </span>
                     </button>
                     <button
+                        className="btn btn--blue"
                         data-color='BLUE'
                         onClick={(event) => {this.changeColor(event) }}
                     >
@@ -121,6 +125,7 @@ class ImageDrawer extends Component {
                         </span>
                     </button>
                     <button
+                        className="btn"
                         data-color='WHITE'
                         onClick={(event) => {this.changeColor(event) }}
                     >

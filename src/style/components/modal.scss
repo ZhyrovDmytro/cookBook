@@ -1,0 +1,36 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    padding-top: 0;
+    overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .2s ease;
+
+    &.active {
+        background-color: rgba(201, 201, 201, .5);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__content {
+        position: relative;
+        padding: 20px 0;
+        margin: 50px;
+        background-color: white;
+        border: 1px solid #eee;
+        border-radius: 10px;
+    }
+
+    &__btn {
+        margin: 10px;
+    }
+
+    &__close {
+        margin-left: 10px;
+    }
+}

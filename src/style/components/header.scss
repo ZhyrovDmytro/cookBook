@@ -1,0 +1,21 @@
+.header {
+    position: relative;
+
+    &__img {
+        width: 100%;
+    }
+
+    &__inputGroup {
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__scroll {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

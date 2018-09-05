@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { REQUIRED, FIELD_LENGTH, INVALID, DIGITS } from './errors/errMessages';
 import ImageDrawer from './ImageDrawer';
@@ -7,117 +7,95 @@ import { RenderField } from './common/textFields/RenderField';
 import { RenderTextArea } from './common/textFields/RenderTextArea';
 import { RenderFieldArray } from './common/textFields/RenderFieldArray';
 
-const validate = values => {
-  const errors = {}
-  if (!values.dishName) {
-    errors.dishName = REQUIRED
-  } else if (values.dishName.length < 3) {
-    errors.dishName = FIELD_LENGTH
-  } else if (/[^a-zA-Z0-9 ]/i.test(values.dishName)) {
-    errors.dishName = INVALID
-  }
-
-  if (!values.totalTime) {
-    errors.totalTime = REQUIRED
-  } else if (isNaN(Number(values.totalTime))) {
-    errors.totalTime = DIGITS
-  }
-
-  if (isNaN(Number(values.prepareTime))) {
-    errors.prepareTime = DIGITS
-  }
-
-  if (isNaN(Number(values.cookTime))) {
-    errors.cookTime = DIGITS
-  }
-
-  if (!values.ingredient) {
-    errors.ingredient = REQUIRED
-  }
-
-  if (!values.instructions) {
-    errors.instructions = REQUIRED
-  }
-  return errors
-}
+const required = value => value ? undefined : REQUIRED;
+const minLength  = value => value && value.length < 3 && FIELD_LENGTH;
+const regexValid  = value => value && /[^a-zA-Z0-9 ]/i.test(value) && INVALID;
+const digitsValidation  = value => value && /[^0-9 ]/i.test(value) && DIGITS;
 
 const ItemForm = props => {
-    const { handleSubmit } = props;
+    const { handleSubmit, className, toggleModal } = props;
 
     return (
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Field
-            name="dishName"
-            type="text"
-            component={RenderField}
-            label="Dish Name"
-          />
-        </div>
-        <div>
-          <label htmlFor="prepareTime">Prepare Time</label>
-          <Field
-            name="prepareTime"
-            component={RenderField}
-            type="text"
-          />
-        </div>
-        <div>
-          <label htmlFor="cookTime">Cook Time</label>
-          <Field
-            name="cookTime"
-            component={RenderField}
-            type="text"
-          />
-        </div>
-        <div>
-          <label htmlFor="totalTime">Total Time</label>
-          <Field
-            name="totalTime"
-            component={RenderField}
-            type="text"
-          />
-        </div>
-        <div>
-          <Field
-            name="ingredient"
-            type="text"
-            component={RenderField}
-            label="Ingredients"
-            placeholder='ingredient'
-          />
-          <FieldArray
-            name='ingredients'
-            component={RenderFieldArray}
-          />
-        </div>
-        <div>
-          <div>
+      <div className={`modal ${className}`}>
+        <div className="modal__content">
+          <form onSubmit={handleSubmit}>
             <Field
-              name="instructions"
-              component={RenderTextArea}
-              label="Instructions"
-              />
-          </div>
+              name="dishName"
+              type="text"
+              component={RenderField}
+              label="Dish Name"
+              placeholder='Enter dish name'
+              validate={[ required, minLength, regexValid ]}
+            />
+            <Field
+              name="prepareTime"
+              component={RenderField}
+              type="text"
+              label="Prepare Time"
+              placeholder='Enter prepare time'
+              validate={[ required, digitsValidation ]}
+            />
+            <Field
+              name="cookTime"
+              component={RenderField}
+              type="text"
+              label="Cook time"
+              placeholder='Enter cook time'
+              validate={[ required, digitsValidation ]}
+            />
+            <Field
+              name="totalTime"
+              component={RenderField}
+              type="text"
+              label="Total time"
+              placeholder='Enter total time'
+              validate={[ required, digitsValidation ]}
+            />
+            <Field
+              name="ingredient"
+              type="text"
+              component={RenderField}
+              label="Ingredients"
+              placeholder='Enter ingredient'
+              validate={[ required, regexValid ]}
+            />
+            <FieldArray
+              name='ingredients'
+              component={RenderFieldArray}
+            />
+              <Field
+                name="instructions"
+                placeholder='Enter preparing instructions'
+                component={RenderTextArea}
+                label="Instructions"
+                validate={[ required ]}
+                />
+            <Field
+              name="img"
+              component={ReduxFormDropzone}
+              dropzoneOnDrop={this.handleDrop}
+            />
+            <ImageDrawer
+              handleCanvas={this.handleCanvasUrl}
+            />
+            <button
+              onClick={() => {toggleModal()}}
+              className="btn btn--close modal__close"
+            >
+                Cancel
+            </button>
+            <button 
+              type="submit"
+              className="modal__btn btn"
+            >
+                Add receipe
+            </button>
+          </form>
         </div>
-        <div>
-          <div>
-          <Field
-            name="img"
-            component={ReduxFormDropzone}
-            dropzoneOnDrop={this.handleDrop}
-          />
-          </div>
-          <ImageDrawer
-            handleCanvas={this.handleCanvasUrl}
-          />
-        </div>
-        <button type="submit">Add receipe</button>
-      </form>
+      </div>
     )
   }
 
 export default reduxForm({
-  form: 'ItemForm',
-  validate
+  form: 'ItemForm'
 })(ItemForm)
