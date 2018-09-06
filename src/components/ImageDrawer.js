@@ -79,8 +79,8 @@ class ImageDrawer extends Component {
             <div className="image-drawer">
                 <canvas
                  className="canvas image-drawer__canvas"
-                 width="400"
-                 height="400"
+                 width="280"
+                 height="280"
                  ref={(ref) => (this.canvas = ref)}
                  onMouseDown={(event) => {this.onMouseDown(event) }}
                  onMouseLeave={(event) => {this.endPaintEvent(event) }}

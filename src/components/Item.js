@@ -8,7 +8,7 @@ class Item extends Component {
         isModalOpen: false
     }
 
-    toggleModal = () => {
+    toggleModal = (evt) => {
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
@@ -49,15 +49,15 @@ class Item extends Component {
         return (
             <div>
                 <button
-                    className="btn"
-                    onClick={this.toggleModal}
+                    className="btn btn--wide"
+                    onClick={(event) => {this.toggleModal(event)}}
                 >
                     Add receipe
                 </button>
                 <ItemForm
                     onSubmit={this.onSubmit}
                     className={this.state.isModalOpen && 'active'}
-                    toggleModal={this.toggleModal}
+                    toggleModal={(event) => {this.toggleModal(event)}}
                 />
             </div>
         )

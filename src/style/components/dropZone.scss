@@ -1,9 +1,13 @@
 .drop-zone {
     border: 1px dotted rgb(95, 95, 95);
     display: block;
-    width: 300px;
+    width: 80%;
     height: 200px;
     margin: 10px;
+
+    @media (min-width: 576px) {
+        width: 300px;
+    }
 
     &:hover {
         background-color: #9ae09a6c;

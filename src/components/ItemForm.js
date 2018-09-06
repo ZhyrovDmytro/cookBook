@@ -18,6 +18,7 @@ const ItemForm = props => {
     return (
       <div className={`modal ${className}`}>
         <div className="modal__content">
+          <h2 className="modal__title">Add new receipe</h2>
           <form onSubmit={handleSubmit}>
             <Field
               name="dishName"
@@ -75,18 +76,23 @@ const ItemForm = props => {
               component={ReduxFormDropzone}
               dropzoneOnDrop={this.handleDrop}
             />
+            <h3 className="modal__sub-title">Draw!</h3>
             <ImageDrawer
               handleCanvas={this.handleCanvasUrl}
             />
             <button
-              onClick={() => {toggleModal()}}
+              onClick={(event) => {
+                event.preventDefault();
+                toggleModal()
+              }}
               className="btn btn--close modal__close"
+              name="addReceipe"
             >
                 Cancel
             </button>
-            <button 
+            <button
               type="submit"
-              className="modal__btn btn"
+              className="btn btn--add modal__btn"
             >
                 Add receipe
             </button>

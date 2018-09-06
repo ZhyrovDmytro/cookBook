@@ -16,12 +16,31 @@
         box-shadow: 0px 22px 26px -9px rgba(0,0,0,0.29);
     }
 
+    &--wide {
+        background-color: rgb(72, 173, 78);
+        color: white;
+        width: 100%;
+
+        &:hover {
+            background-color: rgb(27, 109, 34);
+        }
+    }
+
     &--close {
         background-color: rgb(180, 86, 86);
         color: white;
-        
+
         &:hover {
             background-color: rgb(138, 36, 36);
+        }
+    }
+
+    &--add {
+        background-color: rgb(56, 180, 93);
+        color: white;
+
+        &:hover {
+            background-color: rgb(39, 110, 25);
         }
     }
 

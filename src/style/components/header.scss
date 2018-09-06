@@ -17,5 +17,34 @@
         bottom: 10px;
         left: 50%;
         transform: translate(-50%, -50%);
+        background-color: transparent;
+        outline: none;
+        border: none;
+        animation: bounce 3s infinite;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__arrow {
+        width: 20px;
+        height: 20px;
+        background-color: none;
+        transform: rotate(90deg);
+        transition: .2s ease;
+
+
+    }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+          }
+          40% {
+            transform: translateY(-10px);
+          }
+          60% {
+            transform: translateY(-5px);
+          }
     }
 }

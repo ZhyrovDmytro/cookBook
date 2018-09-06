@@ -1,8 +1,37 @@
 import React, { Component } from 'react';
 import Button from './common/buttons/Button';
 import { connect } from 'react-redux';
-
+import Arrow from '../pic/arrow.svg';
 class Header extends Component {
+
+  scroll = () => {
+    const header = document.querySelector('.header');
+    window.scrollTo({
+      'behavior': 'smooth',
+      'left': 0,
+      'top': header.offsetHeight
+    });
+  }
+
+  filterItems = (evt) => {
+    const items = document.querySelectorAll('.receipe__item');
+    items.forEach(item => {
+      const dishName = item.querySelector('h2').innerText.toUpperCase();
+      const searchInputValue = evt.target.value.toUpperCase();
+      const searchMatched = dishName.includes(searchInputValue);
+
+        if (dishName) {
+            if (searchMatched) {
+              if (item.classList.contains('disable')) {
+                item.classList.remove('disable')
+              }
+                dishName;
+            } else {
+                item.classList.add('disable');
+            }
+        }
+    });
+  }
 
   render() {
     return (
@@ -16,16 +45,16 @@ class Header extends Component {
             <input
                 placeholder='find receipe'
                 className="header__input input__field"
-            />
-            <Button
-                className="btn header__btn"
-                content="FIND"
+                onChange={(event) => {this.filterItems(event)}}
             />
         </div>
         <button
           className="header__scroll"
+          onClick={this.scroll}
         >
-          down
+        <span>
+          <img src={Arrow} className="header__arrow" />
+        </span>
         </button>
       </header>
     );

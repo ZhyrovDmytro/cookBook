@@ -1,11 +1,17 @@
 .image-drawer {
     margin-left: 10px;
-    display: flex;
+    display: block;
+
+    @media (min-width: 576px) {
+        display: flex;
+    }
 
     &__btns {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 5px;
+        @media (min-width: 576px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 5px;
+        }
     }
 }
