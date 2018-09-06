@@ -4,16 +4,23 @@ export const RenderField = ({
     input,
     label,
     type,
+    className,
     placeholder,
     meta: { touched, error },
     val
   }) => (
-    <div>
-      <label>{label}</label>
+    <div className="input">
+      <label className="input__label">{label}</label>
       <div>
-        <input {...input} placeholder={placeholder} type={type} />
-        {touched &&
-          ((error && <span>{error}</span>))}
+        <input
+          {...input}
+          className={`input__field ${className}`}
+          placeholder={placeholder}
+          type={type} />
+          {touched &&
+            (error && (
+              <p className="input__error">{error}</p>
+            ))}
       </div>
     </div>
   );

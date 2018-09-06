@@ -8,7 +8,7 @@ class Item extends Component {
         isModalOpen: false
     }
 
-    toggleModal = () => {
+    toggleModal = (evt) => {
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
@@ -42,25 +42,23 @@ class Item extends Component {
         };
 
         this.props.addItem(newItem);
-        // this.toggleModal();
+        this.toggleModal();
     }
 
     render() {
         return (
-            <div
-                className="modal"
-                // isOpen={this.state.isModalOpen}
-                // toggle={this.toggle}
-            >
-                <h1>Add receipe</h1>
+            <div>
+                <button
+                    className="btn btn--wide"
+                    onClick={(event) => {this.toggleModal(event)}}
+                >
+                    Add receipe
+                </button>
                 <ItemForm
                     onSubmit={this.onSubmit}
+                    className={this.state.isModalOpen && 'active'}
+                    toggleModal={(event) => {this.toggleModal(event)}}
                 />
-                {/* <button
-                    onClick={this.toggleModal}
-                >
-                    Add item
-                </button> */}
             </div>
         )
     }

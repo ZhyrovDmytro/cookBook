@@ -1,71 +1,68 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Button from './common/buttons/Button';
 import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../actions/ItemActions';
-import uuid from 'uuid';
-
+import Arrow from '../pic/arrow.svg';
 class Header extends Component {
 
-  componentDidMount() {
-    this.props.getItems();
+  scroll = () => {
+    const header = document.querySelector('.header');
+    window.scrollTo({
+      'behavior': 'smooth',
+      'left': 0,
+      'top': header.offsetHeight
+    });
   }
 
-  onDeleteClick = (id) => {
-    this.props.deleteItem(id);
+  filterItems = (evt) => {
+    const items = document.querySelectorAll('.receipe__item');
+    items.forEach(item => {
+      const dishName = item.querySelector('h2').innerText.toUpperCase();
+      const searchInputValue = evt.target.value.toUpperCase();
+      const searchMatched = dishName.includes(searchInputValue);
+
+        if (dishName) {
+            if (searchMatched) {
+              if (item.classList.contains('disable')) {
+                item.classList.remove('disable')
+              }
+                dishName;
+            } else {
+                item.classList.add('disable');
+            }
+        }
+    });
   }
 
   render() {
     return (
       <header className="header">
-        <input
-          placeholder='find receipe'
+        <img
+          className="header__img"
+          src={require('../pic/cookbook.jpg')}
+          alt="Cook Book"
         />
-        <Button
-          content="find"
-        />
-        <div>
-          {this.props.item.items.map((item) => {
-            return (
-              <div key={item._id} id={item._id}>
-                <h2>{item.dishName}</h2>
-                <span><b>Prepare Time</b></span><p>{item.prepareTime}</p>
-                <span><b>Cook Time</b></span><p>{item.cookTime}</p>
-                <span><b>Total Time</b></span><p>{item.totalTime}</p>
-                <span><b>Ingredients</b></span><p>{item.ingredient}</p>
-
-                {item.ingredients.map((item) => {
-                  return (
-                    <p key={uuid()}>{item}</p>
-                  )
-                })}
-                <span><b>Instructions</b></span><p>{item.instructions}</p>
-                {item.img[0] && <img src={item.img[0].preview} />}
-                {item.canvasUrl && <img src={item.canvasUrl} />}
-                <button
-                  onClick={() => {
-                    this.onDeleteClick(item._id)
-                  }}
-                >
-                  delete
-                </button>
-              </div>
-            )
-          })}
+        <div className="header__inputGroup">
+            <input
+                placeholder='find receipe'
+                className="header__input input__field"
+                onChange={(event) => {this.filterItems(event)}}
+            />
         </div>
-        {/* <img src={require('../pic/cookbook.jpg')} alt="Cook Book" /> */}
+        <button
+          className="header__scroll"
+          onClick={this.scroll}
+        >
+        <span>
+          <img src={Arrow} className="header__arrow" />
+        </span>
+        </button>
       </header>
     );
   }
-}
-
-Header.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
   item: state.item
 })
 
-export default connect(mapStateToProps, { getItems, deleteItem })(Header);
+export default connect(mapStateToProps)(Header);

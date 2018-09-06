@@ -1,0 +1,17 @@
+.image-drawer {
+    margin-left: 10px;
+    display: block;
+
+    @media (min-width: 576px) {
+        display: flex;
+    }
+
+    &__btns {
+        @media (min-width: 576px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 5px;
+        }
+    }
+}

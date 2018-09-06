@@ -1,0 +1,21 @@
+.text-area {
+    margin: 10px 0 10px 10px;
+    position: relative;
+
+    &__field {
+        height: 100px;
+        padding: 10px;
+        border-radius: 5px;
+        width: 80%;
+        border: 1px solid #eee;
+        
+        @media (min-width: 576px) {
+            width: 300px;
+        }
+    }
+
+    &__error {
+        margin: 0;
+        color: rgb(190, 45, 45);
+    }
+}
