@@ -37,6 +37,7 @@ class Header extends Component {
     return (
       <header className="header">
         <img
+          alt="picture"
           className="header__img"
           src={require('../pic/cookbook.jpg')}
           alt="Cook Book"
@@ -53,7 +54,7 @@ class Header extends Component {
           onClick={this.scroll}
         >
         <span>
-          <img src={Arrow} className="header__arrow" />
+          <img src={Arrow} className="header__arrow"  alt="picture"/>
         </span>
         </button>
       </header>

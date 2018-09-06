@@ -20,18 +20,27 @@ class Header extends Component {
   }
 
   toggleIngridients = evt => {
-    !evt.target.classList.contains('btn--close') &&
-    this.setState({
-      ingridients: !this.state.ingridients
-    });
+    const item = evt.currentTarget;
+    const instructions = evt.currentTarget.querySelector('.receipe__ingridients');
+    if(!evt.target.classList.contains('btn--close')) {
+      if (item.classList.contains('active')) {
+        item.classList.remove('active')
+        instructions.classList.remove('active')
+      } else {
+        item.classList.add('active')
+        instructions.classList.add('active')
+      }
+    }
   }
 
   render() {
+    const { items } = this.props.item;
+    const { loading } = this.props.item;
     return (
       <div className="receipe">
-        {this.props.item.loading &&
-         <Spinner /> }
-        {this.props.item.items.map((item) => {
+        {loading && <Spinner /> }
+         {(items.length  < 1 && !loading) && <h2>No recipes.</h2>}
+        {items.map((item) => {
           return (
               <div
                 className="receipe__item"
@@ -67,12 +76,12 @@ class Header extends Component {
                       </tr>
                     </tbody>
                   </table>
-                  <div>
-                    {item.canvasUrl && <img src={item.canvasUrl}  className="receipe__canvas" />}
+                  <div className="receipe__canvas">
+                    {item.canvasUrl && <img src={item.canvasUrl}  alt="picture" />}
                   </div>
                 </div>
-                {this.state.ingridients && <div className={"receipe__ingridients"}>
-                  {item.img[0] && <img src={item.img[0].preview} className="receipe__img"/>}
+                <div className="receipe__ingridients">
+                  {item.img[0] && <img src={item.img[0].preview} className="receipe__img" alt="picture"/>}
                   <span><b>Ingredients</b></span><p>{item.ingredient}</p>
                   {item.ingredients.map((item) => {
                     return (
@@ -80,7 +89,7 @@ class Header extends Component {
                     )
                   })}
                   <span><b>Instructions</b></span><p>{item.instructions}</p>
-                </div>}
+                </div>
                 <button
                   onClick={() => {
                     this.onDeleteClick(item._id)
