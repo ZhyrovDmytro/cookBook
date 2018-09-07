@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ImageDrawer extends Component {
     position = {
@@ -45,11 +46,11 @@ class ImageDrawer extends Component {
         }
       }
 
-      endPaintEvent = () => {
+    endPaintEvent = () => {
         if (this.state.isDrawing) {
-          this.setState({
-              isDrawing: false
-          });
+            this.setState({
+                isDrawing: false
+            });
         }
     }
 
@@ -138,5 +139,13 @@ class ImageDrawer extends Component {
         )
     }
 }
+
+ImageDrawer.propTypes = {
+    handleCanvas: PropTypes.string
+}
+
+ImageDrawer.defaultProps = {
+    handleCanvas: ''
+};
 
 export default ImageDrawer;

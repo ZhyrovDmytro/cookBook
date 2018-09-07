@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from './common/buttons/Button';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Arrow from '../pic/arrow.svg';
 class Header extends Component {
@@ -61,6 +61,20 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  item: PropTypes.shape({
+    error: PropTypes.string,
+    items: PropTypes.arrayOf(PropTypes.object),
+    loading: PropTypes.bool.isRequired,
+  }).isRequired,
+}
+
+Header.defaultProps = {
+  error: '',
+  items: []
+};
 
 const mapStateToProps = (state) => ({
   item: state.item

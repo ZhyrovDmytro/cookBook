@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { REQUIRED, FIELD_LENGTH, INVALID, DIGITS } from './errors/errMessages';
 import ImageDrawer from './ImageDrawer';
@@ -14,7 +15,6 @@ const digitsValidation  = value => value && /[^0-9 ]/i.test(value) && DIGITS;
 
 const ItemForm = props => {
     const { handleSubmit, className, toggleModal } = props;
-
     return (
       <div className={`modal ${className}`}>
         <div className="modal__content">
@@ -100,6 +100,12 @@ const ItemForm = props => {
         </div>
       </div>
     )
+  }
+
+  ItemForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    toggleModal: PropTypes.func.isRequired,
+    className: PropTypes.bool.isRequired
   }
 
 export default reduxForm({

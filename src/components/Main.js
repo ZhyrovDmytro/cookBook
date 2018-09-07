@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/ItemActions';
 import ItemForm from './ItemForm';
 
-class Item extends Component {
+class Main extends Component {
     state = {
         isModalOpen: false
     }
@@ -64,9 +65,25 @@ class Item extends Component {
     }
 }
 
+Main.propTypes = {
+    addItem: PropTypes.func.isRequired,
+    error: PropTypes.string,
+    item: PropTypes.shape({
+      error: PropTypes.string,
+      items: PropTypes.arrayOf(PropTypes.object),
+      loading: PropTypes.bool.isRequired,
+    }).isRequired,
+    items: PropTypes.arrayOf(PropTypes.object),
+  }
+
+  Main.defaultProps = {
+    error: '',
+    items: []
+  };
+
 const mapStateToProps = (state) => ({
     item: state.item
 })
 
 
-export default connect(mapStateToProps, { addItem })(Item)
+export default connect(mapStateToProps, { addItem })(Main)

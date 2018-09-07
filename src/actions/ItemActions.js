@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING, ERROR } from './types';
 
 export const getItems = () => dispatch => {
+
     dispatch(itemsAreLoading());
 
     axios.get('/api/items')
@@ -9,6 +10,13 @@ export const getItems = () => dispatch => {
             dispatch({
                 type: GET_ITEMS,
                 payload: res.data
+            })
+        })
+        .catch(err => {
+            const error = `Status ${err.response.status} ${err.response.statusText}`
+            dispatch({
+                type: ERROR,
+                payload: error
             })
         })
 };
@@ -21,6 +29,13 @@ export const addItem = item => dispatch => {
                 payload: res.data
             })
         })
+        .catch(err => {
+            const error = `Status ${err.response.status} ${err.response.statusText}`
+            dispatch({
+                type: ERROR,
+                payload: error
+            })
+        })
 };
 
 export const deleteItem = id => dispatch => {
@@ -29,6 +44,13 @@ export const deleteItem = id => dispatch => {
             dispatch({
                 type: DELETE_ITEM,
                 payload: id
+            })
+        })
+        .catch(err => {
+            const error = `Status ${err.response.status} ${err.response.statusText}`
+            dispatch({
+                type: ERROR,
+                payload: error
             })
         })
 };
