@@ -25,7 +25,6 @@ class Header extends Component {
               if (item.classList.contains('disable')) {
                 item.classList.remove('disable')
               }
-                dishName;
             } else {
                 item.classList.add('disable');
             }
@@ -37,7 +36,6 @@ class Header extends Component {
     return (
       <header className="header">
         <img
-          alt="picture"
           className="header__img"
           src={require('../pic/cookbook.jpg')}
           alt="Cook Book"
@@ -54,7 +52,7 @@ class Header extends Component {
           onClick={this.scroll}
         >
         <span>
-          <img src={Arrow} className="header__arrow"  alt="picture"/>
+          <img src={Arrow} className="header__arrow"  alt="Arrow"/>
         </span>
         </button>
       </header>
