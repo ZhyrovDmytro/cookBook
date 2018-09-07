@@ -27,7 +27,7 @@
         }
 
         @media (min-width: 576px) {
-            width: 50%;
+            width: 45%;
         }
 
         @media (min-width: 992px) {
@@ -53,10 +53,14 @@
 
     &__content {
         &.active {
-            margin: 50px 80px;
+            margin: 0 5px;
             background-color: white;
             border-radius: 10px;
-            padding: 20px;
+            
+            @media (min-width: 576px) {
+                margin: 50px 80px;
+            }
+
         }
     }
 

@@ -88,11 +88,11 @@ class Header extends Component {
                       </tbody>
                     </table>
                     <div className="receipe__canvas">
-                      {item.canvasUrl && <img src={item.canvasUrl}  alt="picture" />}
+                      {item.canvasUrl && <img src={item.canvasUrl} alt="Receipe canvas" />}
                     </div>
                   </div>
                   <div className="receipe__ingridients">
-                    {item.img[0] && <img src={item.img[0].preview} className="receipe__img" alt="picture"/>}
+                    {item.img[0] && <img src={item.img[0].preview} className="receipe__img" alt="Receipe img"/>}
                     <span><b>Ingredients</b></span><p>{item.ingredient}</p>
                     {item.ingredients.map((item) => {
                       return (
